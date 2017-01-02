@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>TopicThunder - Sudoku Puzzle Solver</title>
+    <meta name="Description" content="A sudoku puzzle solver powered by Apache ActiveMQ"/>
+    <link rel="stylesheet" href="chat.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/amq_jquery_adapter.js"></script>
+
+    <script type="text/javascript" src="js/amq.js"></script>
+    <script type="text/javascript" src="js/chat.js"></script>
+    <script type="text/javascript">
+
+        // Note, normally you wouldn't just add an onload function in this
+        // manner. In fact, you typically want to fire this method on the
+        // document.onready event, however this type of functionality is verbose
+        // and best left to the domain of your favorite js library.
+        //
+        // For example, in jQuery the following onload would be replaced with:
+        // jQuery(function() {
+        //     org.activemq.Amq.init({ uri: 'amq' });
+        //     org.activemq.Chat.init();
+        // }        
+        window.onload = function() {
+            org.activemq.Amq.init({ uri: 'amq/init', logging: true, timeout: 1.5, jmsSelection: false});
+            org.activemq.Chat.init();    
+        };
+    </script>
+
+</head>
+
+<body>
+	<p id="banner"><b><i>Topic Thunder</i></b></p>
+	<p id="headp1">Resolver engine uses an ActiveMQ topic to propagate solutions .. <i>a chain reaction</i></p>
+<div id="mainpanel">
+<form id="playbox">
+<div id="puzzlebox">
+	<div class="groupbox">
+		<input type="text" name="A1" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="A2" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="A3" size="1" maxlength="1" class="whitecell" value=""/>
+		<br/>
+		<input type="text" name="B1" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="B2" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="B3" size="1" maxlength="1" class="whitecell" value=""/>
+		<br/>
+		<input type="text" name="C1" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="C2" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="C3" size="1" maxlength="1" class="whitecell" value="8"/>
+	</div>
+	<div class="groupbox">
+		<input type="text" name="A4" size="1" maxlength="1" class="greycell" value="2"/>
+		<input type="text" name="A5" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="A6" size="1" maxlength="1" class="greycell" value=""/>
+		<br/>
+		<input type="text" name="B4" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="B5" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="B6" size="1" maxlength="1" class="greycell" value=""/>
+		<br/>
+		<input type="text" name="C4" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="C5" size="1" maxlength="1" class="greycell" value="4"/>
+		<input type="text" name="C6" size="1" maxlength="1" class="greycell" value="3"/>
+	</div>
+	<div class="groupbox">
+		<input type="text" name="A7" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="A8" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="A9" size="1" maxlength="1" class="whitecell" value=""/>
+		<br/>
+		<input type="text" name="B7" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="B8" size="1" maxlength="1" class="whitecell" value="1"/>
+		<input type="text" name="B9" size="1" maxlength="1" class="whitecell" value="7"/>
+		<br/>
+		<input type="text" name="C7" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="C8" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="C9" size="1" maxlength="1" class="whitecell" value=""/>
+	</div><br/>
+	<div class="groupbox">
+		<input type="text" name="D1" size="1" maxlength="1" class="greycell" value="6"/>
+		<input type="text" name="D2" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="D3" size="1" maxlength="1" class="greycell" value=""/>
+		<br/>
+		<input type="text" name="E1" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="E2" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="E3" size="1" maxlength="1" class="greycell" value="1"/>
+		<br/>
+		<input type="text" name="F1" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="F2" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="F3" size="1" maxlength="1" class="greycell" value="5"/>
+	</div>
+	<div class="groupbox">
+		<input type="text" name="D4" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="D5" size="1" maxlength="1" class="whitecell" value="9"/>
+		<input type="text" name="D6" size="1" maxlength="1" class="whitecell" value=""/>
+		<br/>
+		<input type="text" name="E4" size="1" maxlength="1" class="whitecell" value="4"/>
+		<input type="text" name="E5" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="E6" size="1" maxlength="1" class="whitecell" value=""/>
+		<br/>
+		<input type="text" name="F4" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="F5" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="F6" size="1" maxlength="1" class="whitecell" value="8"/>
+	</div>
+	<div class="groupbox">
+		<input type="text" name="D7" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="D8" size="1" maxlength="1" class="greycell" value="4"/>
+		<input type="text" name="D9" size="1" maxlength="1" class="greycell" value=""/>
+		<br/>
+		<input type="text" name="E7" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="E8" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="E9" size="1" maxlength="1" class="greycell" value="2"/>
+		<br/>
+		<input type="text" name="F7" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="F8" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="F9" size="1" maxlength="1" class="greycell" value="9"/>
+	</div><br/>
+	<div class="groupbox">
+		<input type="text" name="G1" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="G2" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="G3" size="1" maxlength="1" class="whitecell" value=""/>
+		<br/>
+		<input type="text" name="H1" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="H2" size="1" maxlength="1" class="whitecell" value="4"/>
+		<input type="text" name="H3" size="1" maxlength="1" class="whitecell" value=""/>
+		<br/>
+		<input type="text" name="I1" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="I2" size="1" maxlength="1" class="whitecell" value="9"/>
+		<input type="text" name="I3" size="1" maxlength="1" class="whitecell" value=""/>
+	</div>
+	<div class="groupbox">
+		<input type="text" name="G4" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="G5" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="G6" size="1" maxlength="1" class="greycell" value=""/>
+		<br/>
+		<input type="text" name="H4" size="1" maxlength="1" class="greycell" value="8"/>
+		<input type="text" name="H5" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="H6" size="1" maxlength="1" class="greycell" value=""/>
+		<br/>
+		<input type="text" name="I4" size="1" maxlength="1" class="greycell" value=""/>
+		<input type="text" name="I5" size="1" maxlength="1" class="greycell" value="3"/>
+		<input type="text" name="I6" size="1" maxlength="1" class="greycell" value="5"/>
+	</div>
+	<div class="groupbox">
+		<input type="text" name="G7" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="G8" size="1" maxlength="1" class="whitecell" value="5"/>
+		<input type="text" name="G9" size="1" maxlength="1" class="whitecell" value=""/>
+		<br/>
+		<input type="text" name="H7" size="1" maxlength="1" class="whitecell" value="3"/>
+		<input type="text" name="H8" size="1" maxlength="1" class="whitecell" value="7"/>
+		<input type="text" name="H9" size="1" maxlength="1" class="whitecell" value=""/>
+		<br/>
+		<input type="text" name="I7" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="I8" size="1" maxlength="1" class="whitecell" value=""/>
+		<input type="text" name="I9" size="1" maxlength="1" class="whitecell" value=""/>
+	</div><br/>
+  </div>
+</form>
+<div class="panel2A">
+	<div class="panel1">
+		<textarea id="status" rows="16" cols="30"/>paste start pattern here</textarea>
+	</div>
+	<div class="panel1">
+		<button id="gameB1">Start Game</button>
+		<button id="gameB2">Load Start Pattern</button>
+	</div>
+</div>
+<div class="panel2B">
+	<p id="footp1">The start pattern format is adopted from a Peter Norvig (Google developer) sudoku programming web site</p>
+	<div class="panel3">
+		<a href="samples/testcases1_pnorvig.txt">sample page 1</a>
+		<a href="samples/testcases2_pnorvig.txt">sample page 2</a>
+		<a href="samples/testcases3_pnorvig.txt">sample page 3</a>
+		<a href="samples/testcases4_pnorvig.txt">sample page 4</a>
+		<a href="samples/testcases5_pnorvig.txt">sample page 5</a>
+		<a href="samples/testcases6_pnorvig.txt">sample page 6</a>
+		<a href="samples/testcases7_pnorvig.txt">sample page 7</a>
+		<a href="samples/testcases8_pnorvig.txt">sample page 8</a>
+		<a href="samples/testcases9_pnorvig.txt">sample page 9</a>
+		<a href="samples/testcases10_pnorvig.txt">sample page 10</a>
+	</div>
+</div>
+<div id="footd1">
+	<p id="footp2">Powered by ActiveMQ</p>
+	<br/>
+</div>
+</p>
+</body>
+</html>
