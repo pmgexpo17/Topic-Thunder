@@ -1,2 +1,2 @@
 # Topic-Thunder
-Sudoku solver JMS integeration app using JMS topic to propogate solutions
+A JMS integration application that has a Suduku solver state machine using JMS topic to propogate solutions
