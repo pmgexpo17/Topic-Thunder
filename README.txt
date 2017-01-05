@@ -4,13 +4,13 @@ A JMS integration demo application that implements a Sudoku puzzle solving webap
 System Requirements :
 
 1. JDK 1.8
-  a. lambda expresssions were introduced in Java 8
+  a. required lambda expresssions were introduced in Java 8
   
 2. ActiveMQ 
   a. minimum version 5.10.0
   
 3. Java project IDE with Maven module extension
-  b. recommended : Netbeans 8.1
+  b. recommended : Netbeans 8.0.2 or 8.1
 
 Setup Instructions :
 
@@ -25,15 +25,15 @@ Setup Instructions :
     i. to stop run : sudo service activemq stop
   b. copy Jms-WebClient-Model-V1.jar to /opt/activemq/lib
   b. in /opt/activemq/webapps create a new folder called TopicThunder
-  c. copy the TopicThunder webapp content into this folder
+  c. copy the TopicThunder webapp package content into this folder
     i. apply the same owner and group as the activemq root folder
   d. update the jetty conf file : /opt/activemq/conf/jetty.xml, see Appendix A
   e. start activemq : sudo service activemq start
   f. at this point, make sure Topic Thunder Game Station is running
     i. see Netbeans project setup instructions
-  f. point your web browser to : http://localhost:8161/TopicThunder/
+  g. point your web browser to : http://localhost:8161/TopicThunder/
     i. the home page provides sudoku puzzle samples which have a predefined format
-    ii. paste the start map into your text box and click 'Load Start Pattern'
+    ii. paste your start map into the text box and click 'Load Start Pattern'
     iii. click 'Start Game', then wait for the solution to appear
     iv. if a 'sudoku server is offline' dialog appears click refresh and try again
 
