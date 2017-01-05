@@ -26,7 +26,7 @@ import org.pmg.jms.sudoku.genmodel.SudokuModel;
 import org.pmg.jms.sudoku.genmodel.SudokuModule;
 
 /**
- *
+ * Top level JMS integration with Guice DI making it all possible
  * @author peter
  */
 public class GameStation {
@@ -44,12 +44,12 @@ public class GameStation {
             sudokuModel1.configure("session1");
             sudokuModel1.showAllRoutes();
             sudokuModel1.start();
-
+/*
             SudokuModel sudokuModel2 = injector1.getInstance(Key.get(SudokuModel.class));
             sudokuModel2.configure("session2");
             sudokuModel2.showAllRoutes();
             sudokuModel2.start();
-
+*/
             Injector injector2 = Guice.createInjector(new JmsClientModule(),
                                                         new GameModule());
 
@@ -57,16 +57,16 @@ public class GameStation {
             sudokuPeer1.configure("session1");
             sudokuPeer1.start();
             sudokuPeer1.showAllRoutes();
-
+/*
             SudokuPeer sudokuPeer2 = injector2.getInstance(Key.get(SudokuPeer.class));
             sudokuPeer2.configure("session2");
             sudokuPeer2.start();
             sudokuPeer2.showAllRoutes();
-
+*/
             GameServer gameServer = injector2.getInstance(Key.get(GameServer.class));
             gameServer.configure();
             gameServer.addCapacity("session1");
-            gameServer.addCapacity("session2");
+  //          gameServer.addCapacity("session2");
             gameServer.start();  
             gameServer.showAllRoutes();
         } catch(Exception ex) {
