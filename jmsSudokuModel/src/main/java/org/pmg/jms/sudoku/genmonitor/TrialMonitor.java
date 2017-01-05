@@ -8,7 +8,7 @@ package org.pmg.jms.sudoku.genmonitor;
 import org.pmg.jms.sudoku.genresolvar.TrialAgent;
 
 /**
- *
+ * Required for Guice binding
  * @author peter
  */
 public interface TrialMonitor {

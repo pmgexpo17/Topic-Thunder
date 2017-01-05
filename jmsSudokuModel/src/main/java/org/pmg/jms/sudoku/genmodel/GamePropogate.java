@@ -28,12 +28,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Handles message routing and runs a Director deployed state machine iteration 
+ * mapped by routeId
  * @author peter
  */
 public class GamePropogate implements Deliverable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GamePropogate.class);
+    private static final Logger LOG = 
+                                   LoggerFactory.getLogger(GamePropogate.class);
     private final String className = getClass().getSimpleName();
     private final Controller controller;
     private String routeId;

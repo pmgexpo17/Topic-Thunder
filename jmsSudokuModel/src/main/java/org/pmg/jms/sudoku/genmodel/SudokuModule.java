@@ -38,7 +38,7 @@ import org.pmg.jms.sudoku.genresolvar.ResolveUnitB1;
 import org.pmg.jms.sudoku.genresolvar.ResponseUnitB1;
 
 /**
- *
+ * Guice bindings and JMS config providers
  * @author peter
  */
 public class SudokuModule extends AbstractModule {
