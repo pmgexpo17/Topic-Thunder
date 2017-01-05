@@ -21,8 +21,6 @@ import com.google.inject.name.Named;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.jms.JMSException;
 import org.pmg.jms.genconfig.JmsClientScoped;
 import org.pmg.jms.genbase.AbstractLifeCycle;
@@ -32,13 +30,11 @@ import org.pmg.jms.genhandler.HandlerCollection;
 /**
  * AppController is the engine for ClientPeer runnable task execution
  * Add a local Guice binding to define ThreadSize in <YourAppModule>.configure
- * RouteHandler resolves a handler instance by lookup using the associated
- * Delegate.routeId
+ * RouteHandler gets a handler instance by lookup using Delegate.routeId as key 
  * @author Peter A McGill
  */
 @JmsClientScoped
-public class AppController extends AbstractLifeCycle 
-                                            implements Controller {
+public class AppController extends AbstractLifeCycle  implements Controller {
 
     private final String className;
     private final ThreadPoolExecutor threadpool;
@@ -53,7 +49,7 @@ public class AppController extends AbstractLifeCycle
        threadpool = (ThreadPoolExecutor) 
                                 Executors.newFixedThreadPool(threadPoolSize);
        this.router = router;
-       System.out.println("[AppController] created : " + toString());       
+       LOG.info("[AppController] created : {}",toString());       
     }
     
     @Override

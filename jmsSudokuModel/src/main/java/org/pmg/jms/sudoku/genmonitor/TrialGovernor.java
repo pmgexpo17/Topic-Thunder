@@ -24,7 +24,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Manages game level trial-error behaviour for TrialOption iterations and 
+ * rollbacks and TrialOption rank evaluation. See TrialAgent for unit level
+ * trial-error behaviour.
  * @author peter
  */
 @JmsClientScoped

@@ -21,9 +21,7 @@ import org.apache.activemq.MessageAvailableListener;
 import org.pmg.jms.genbase.LifeCycle;
 
 /**
- * Membership is a jms message consumer
- The consumer action is delegated to a complimentary App which is called by
- AppController execution, referenced by a route url
+ * Membership is a JMS message consumer
  * @author Peter A McGill
  */
 

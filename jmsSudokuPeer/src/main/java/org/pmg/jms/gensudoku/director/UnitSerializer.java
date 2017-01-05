@@ -17,6 +17,7 @@ package org.pmg.jms.gensudoku.director;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import org.slf4j.Logger;
@@ -28,7 +29,8 @@ import org.slf4j.LoggerFactory;
  */
 public class UnitSerializer {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UnitSerializer.class);        
+    private static final Logger LOG = 
+                                LoggerFactory.getLogger(UnitSerializer.class);        
 
     public byte[] toByteArray(Object object) {
         // serialize the object    
@@ -39,7 +41,7 @@ public class UnitSerializer {
             oos.flush();
             oos.close();
             return baos.toByteArray();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
              LOG.error("[UnitSerializer] failed to serialize object",ex);
         }
         return null;
@@ -51,7 +53,7 @@ public class UnitSerializer {
             ByteArrayInputStream bais = new ByteArrayInputStream(serialized);
             ObjectInputStream ois = new ObjectInputStream(bais);
             return ois.readObject();
-        } catch (Exception ex) {
+        } catch (IOException | ClassNotFoundException ex) {
              LOG.error("[UnitSerializer] failed to deserialize object",ex);
         }
         return null;

@@ -16,7 +16,7 @@
 package org.pmg.jms.gensudoku.genprofile;
 
 /**
- *
+ * Profile for ROWF
  * @author peter
  */
 public class ProfileRowF implements Profile {

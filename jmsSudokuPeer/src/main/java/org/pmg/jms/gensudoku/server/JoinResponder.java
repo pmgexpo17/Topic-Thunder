@@ -23,25 +23,24 @@ import javax.jms.Queue;
 import javax.jms.TextMessage;
 import org.pmg.jms.genclient.ClientResponder;
 import org.pmg.jms.genclient.Routable;
-import org.pmg.jms.genconnect.OpenWireSessionPrvdr;
+import org.pmg.jms.genconnect.OpenWire;
+import org.pmg.jms.genconnect.SessionProvider;
 import org.pmg.jms.genhandler.Handler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
+ * If the webClient provided startMap is valid, calls the game server to provide
+ * a sudoku game and solution 
  * @author peter
  */
 public class JoinResponder extends ClientResponder implements Handler {
  
-    private static final Logger LOG = LoggerFactory.getLogger(JoinResponder.class);
-    private static final int MESSAGE_LIFESPAN = 3000;  // milliseconds (3 seconds)
+    private static final int MESSAGE_LIFESPAN = 3000;  // 3 seconds
     private GameService gameServer;
 
     @Inject
-    public JoinResponder(OpenWireSessionPrvdr sessionProvider) {
-
-        super(sessionProvider);
+    public JoinResponder(@OpenWire SessionProvider sessionPrvdr) {        
+        
+        super(sessionPrvdr);
     }
     
     public void setGameServer(GameService gameServer) {

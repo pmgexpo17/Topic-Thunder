@@ -23,7 +23,7 @@ import org.pmg.jms.gensudoku.server.NextGameResponder;
 import org.pmg.jms.gensudoku.server.PingResponder;
 
 /**
- *
+ * Compliments FactoryModuleBuilder binding in GameModule
  * @author peter
  */
 public interface GameFactory {

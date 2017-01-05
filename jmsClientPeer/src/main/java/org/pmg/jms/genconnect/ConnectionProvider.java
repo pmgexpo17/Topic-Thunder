@@ -21,7 +21,7 @@ import javax.jms.JMSException;
 /**
  * Extends special Guice interface for provider exception handling
  * @author Peter A McGill
- * @param <Connection> : Jms Connection
+ * @param <Connection> : JMS connection component
  */
 public interface ConnectionProvider<Connection> 
                                         extends CheckedProvider<Connection> {

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- *
+ * ReductorBean snapshot data
  * @author peter
  */
 public class Snapshot {

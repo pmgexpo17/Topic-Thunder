@@ -29,8 +29,9 @@ import org.slf4j.LoggerFactory;
  */
 public class GameRecorder {
     
-    private static final Logger LOG = LoggerFactory.getLogger(GameRecorder.class);
-    private static final int MESSAGE_LIFESPAN = 3000;  // milliseconds (3 seconds)
+    private static final Logger LOG = 
+                                    LoggerFactory.getLogger(GameRecorder.class);
+    private static final int MESSAGE_LIFESPAN = 3000;  // 3 seconds
     private final String className = getClass().getSimpleName();
     private volatile ClientState state;
     private GameRecord record;    

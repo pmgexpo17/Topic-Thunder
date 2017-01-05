@@ -22,7 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Evaluates the trialOption rank for each unit cell. Top score means : the unit 
+ * cell or cells which have the least number of remaining options
  * @author peter
  */
 public class Rankoten {

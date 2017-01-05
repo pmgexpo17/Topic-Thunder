@@ -1,8 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * Copyright (c) 2016 Peter A McGill
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License. 
+**/
 package org.pmg.jms.genclient;
 
 import com.google.inject.Inject;
@@ -13,10 +23,11 @@ import javax.jms.Message;
 import javax.jms.MessageConsumer;
 
 /**
- *
+ * MultiMessenger saves creating a message listener for each route in a set
+ * where the dependant state machine action requires group acknowledgement
+ * @param <X> Real class ClientMember is a JMS message consumer
+ * @param <Y> Delegates message routing and invokes state machine iteration
  * @author peter
- * @param <X>
- * @param <Y>
  */
 public class MultiMessenger<X extends Membership, 
                     Y extends Deliverable> extends AbstractMessenger {

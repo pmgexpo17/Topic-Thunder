@@ -16,7 +16,7 @@
 package org.pmg.jms.sudoku.genresolvar;
 
 /**
- *
+ * For reductor boundary condition awareness
  * @author peter
  */
 public class ResolveException extends Exception {

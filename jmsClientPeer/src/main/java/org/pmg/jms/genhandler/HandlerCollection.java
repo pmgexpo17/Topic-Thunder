@@ -15,21 +15,21 @@
 **/
 package org.pmg.jms.genhandler;
 
-import java.util.HashMap;
+import java.util.Map;
 import javax.jms.JMSException;
 import org.pmg.jms.genbase.Destroyable;
 import org.pmg.jms.genbase.LifeCycle;
 import org.pmg.jms.genclient.Routable;
 
 /**
- * A handler collection stores all handlers for a ClientPeer application
+ * A handler collection maps routeId to Handler for JMS applications
  * @author Peter A McGill
  */
 public interface HandlerCollection extends LifeCycle, Destroyable {
 
     public void addHandler(String routeId, Handler handler);
 
-    public HashMap<String,Handler> getHandlers();
+    public Map<String,Handler> getHandlers();
     
     public Handler removeHandler(String routeId);
     

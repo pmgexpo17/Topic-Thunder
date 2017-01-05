@@ -25,22 +25,22 @@ import javax.jms.Session;
 import org.pmg.jms.genbase.AbstractLifeCycle;
 import org.pmg.jms.genconnect.SessionAgent;
 import org.pmg.jms.genconnect.SessionProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * QueueRespondar is a jms message producer
+ * Provides multiple JMS destination capacity, where destKey is mapped to a JMS
+ * producer for message delivery
  * @author Peter A McGill
  */
-public class ClientResponder extends AbstractLifeCycle 
-                                                  implements Responsive {
-    private static final Logger LOG = LoggerFactory.getLogger(ClientResponder.class);
+public class ClientResponder extends AbstractLifeCycle implements Responsive {
+
     private final HashMap<String,Respondar> pcache;
     private SessionAgent sessionAgent;
     protected final String className = getClass().getSimpleName();
 
-
-    public ClientResponder(SessionProvider<SessionAgent> sessionProvider) {
+    // descendent will inject the sessionProvider
+    // guice doesn't allow throwing exceptions during injection
+    // TO DO : register a container event handler for the error scenario
+    public ClientResponder(SessionProvider sessionProvider) {
 
         try {
             sessionAgent = sessionProvider.get();

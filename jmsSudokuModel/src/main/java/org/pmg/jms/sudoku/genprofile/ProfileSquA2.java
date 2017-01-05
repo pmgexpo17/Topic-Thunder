@@ -16,7 +16,7 @@
 package org.pmg.jms.sudoku.genprofile;
 
 /**
- *
+ * Profile for SQUA2
  * @author peter
  */
 public class ProfileSquA2 implements Profile {

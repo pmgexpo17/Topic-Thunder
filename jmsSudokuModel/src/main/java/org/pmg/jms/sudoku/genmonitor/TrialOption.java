@@ -16,7 +16,7 @@
 package org.pmg.jms.sudoku.genmonitor;
 
 /**
- *
+ * Stores the remaining cell options of the current top ranked cell for a unit
  * @author peter
  */
 public class TrialOption {

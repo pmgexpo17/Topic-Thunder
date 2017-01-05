@@ -16,7 +16,7 @@
 package org.pmg.jms.gensudoku.genprofile;
 
 /**
- *
+ * Profile for COL8
  * @author peter
  */
 public class ProfileCol8 implements Profile {

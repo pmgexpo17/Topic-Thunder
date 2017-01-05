@@ -13,13 +13,6 @@
     <name>Generic Guiced Client Peer ActiveMQ</name>
     <description>Generic guiced and scoped Client Peer for ActiveMQ</description>
 
-    <repositories>
-        <repository>
-            <id>Fusesource Snapshots</id>
-            <url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
-        </repository>
-    </repositories>
-
     <dependencies>
 	<dependency>
             <groupId>com.google.inject</groupId>
@@ -57,24 +50,6 @@
             <artifactId>xstream</artifactId>
             <version>1.4.7</version>
 	</dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-core</artifactId>
-            <version>5.7-fuse-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>com.google.collections</groupId>
-            <artifactId>google-collections</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
 
     <build>

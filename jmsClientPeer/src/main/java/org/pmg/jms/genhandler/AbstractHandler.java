@@ -24,7 +24,8 @@ import org.pmg.jms.genclient.Routable;
  * A default destroy method is provided
  * @author Peter A McGill
  */
-public abstract class AbstractHandler extends AbstractLifeCycle implements Handler {
+public abstract class AbstractHandler extends AbstractLifeCycle 
+                                                            implements Handler {
 
     @Override
     public abstract void handle(Routable delegate) throws JMSException;

@@ -17,7 +17,9 @@ package org.pmg.jms.gensudoku.genprofile;
 
 
 /**
- *
+ * getAllPeers : return a peer unit array for a given key, ie, cellId. For a
+ * given cellId there are always 3 units that intersect
+ * getUnitKeys : returns the cellId array for the related unit
  * @author peter
  */
 public interface Profile {

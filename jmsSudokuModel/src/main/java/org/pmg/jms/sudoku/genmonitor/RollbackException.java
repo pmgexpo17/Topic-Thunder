@@ -16,7 +16,7 @@
 package org.pmg.jms.sudoku.genmonitor;
 
 /**
- *
+ * For rollback boundary condition awareness
  * @author peter
  */
 public class RollbackException extends Exception {

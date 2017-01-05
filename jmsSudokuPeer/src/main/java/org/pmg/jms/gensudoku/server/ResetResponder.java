@@ -18,17 +18,13 @@ package org.pmg.jms.gensudoku.server;
 import javax.jms.JMSException;
 import org.pmg.jms.genclient.Routable;
 import org.pmg.jms.genhandler.AbstractHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
+ * On game completion, calls game server release method for service continuity
  * @author peter
  */
 public class ResetResponder extends AbstractHandler {
  
-    private static final Logger LOG = 
-                                LoggerFactory.getLogger(ResetResponder.class);
     private GameService gameServer;
 
     public void setGameServer(GameService gameServer) {

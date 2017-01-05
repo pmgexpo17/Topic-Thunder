@@ -10,15 +10,8 @@
     <packaging>jar</packaging>
     <version>3.0</version>
 
-    <name>Generic Guiced Sudoku Model ActiveMQ</name>
+    <name>Generic Guiced Sudoku Solver for ActiveMQ</name>
     <description>Generic Guiced Sudoku Solver for ActiveMQ</description>
-
-    <!--repositories>
-        <repository>
-            <id>Fusesource Snapshots</id>
-            <url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
-        </repository>
-    </repositories-->
 
     <dependencies>
 	<dependency>

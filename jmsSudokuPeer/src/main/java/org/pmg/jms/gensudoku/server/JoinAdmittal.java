@@ -22,7 +22,7 @@ import org.pmg.jms.genhandler.JmsAjaxBean;
 import org.pmg.jms.genhandler.XStreamHandler;
 
 /**
- *
+ * Checks the webClient provided startMap is valid
  * @author peter
  */
 public class JoinAdmittal {
@@ -41,7 +41,8 @@ public class JoinAdmittal {
                 errText = "Error : startMap is null";
                 break;
             case 3 :
-                errText = "Error : startMap count is less than allowed mininum, 17";
+                errText = 
+                    "Error : startMap count is less than allowed mininum, 17";
                 break;
             default :
                 break;

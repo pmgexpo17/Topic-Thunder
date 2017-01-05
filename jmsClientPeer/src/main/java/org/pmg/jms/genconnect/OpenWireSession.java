@@ -20,17 +20,15 @@ import javax.jms.JMSException;
 import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.Topic;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.pmg.jms.genbase.AbstractLifeCycle;
 
 /**
  * A decorated session with convenience methods for OpenWire queue and topic
  * creation. Create messages by using the session directly
  * @author Peter A McGill
  */
-public class OpenWireSession implements SessionAgent {
+public class OpenWireSession extends AbstractLifeCycle implements SessionAgent {
 
-    private static final Logger LOG = LoggerFactory.getLogger(OpenWireSession.class);
     private final Session session;    
 
     public OpenWireSession(Session session) {
@@ -62,7 +60,19 @@ public class OpenWireSession implements SessionAgent {
     
         return session.createTopic(topicName);                
     }
-    
+
+    @Override
+    protected void doStop() {
+
+        try {
+            LOG.info("OpenWire session is closing");
+            session.close();
+        }
+        catch (JMSException ex) {
+            LOG.error("Error stopping OpenWire session", ex);
+        }
+    }
+
     @Override
     public Session getSession() {
 

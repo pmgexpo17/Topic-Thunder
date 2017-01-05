@@ -16,13 +16,9 @@
 package org.pmg.jms.genconfig;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Scopes;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import javax.jms.Connection;
-import org.pmg.jms.genclient.ClientPeer;
-import org.pmg.jms.genclient.ServicePeer;
 import org.pmg.jms.genconnect.ConnectionProvider;
 import org.pmg.jms.genconnect.Connector;
 import org.pmg.jms.genconnect.OpenWire;
@@ -37,12 +33,12 @@ import org.pmg.jms.gendirector.AppController;
 /**
  - These Guice bindings are purposely incomplete
  - You must add :
- - 1.ServicePeer to ClientPeerExt binding, where ClientPeerExt extends
- -   ClientPeer and declares the connector transport type by annotation
+ - 1.ServicePeer to ClientPeerDes binding, where ClientPeerDes extends
+ -   ClientPeer and injects the connector transport type with annotation
  -   Eg @OpenWire transport is provided in the package
  - 2.Statement to ClientState binding, which depends on the scoping application
  -   Ie, if your ClientState scoping is not achievable with JmsClientScoped then
- -   create a new scope and ClientScope bean and bind them
+ -   create a new scope and ClientState bean and bind them
  - 3.ActiveMQConfig provides method or Provider binding
  - 4.SessionConfig provides method or Provider binding
  - 5.Annotated ThreadSize Integer binding

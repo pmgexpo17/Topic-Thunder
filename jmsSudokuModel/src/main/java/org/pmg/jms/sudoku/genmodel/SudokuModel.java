@@ -37,16 +37,15 @@ import org.pmg.jms.sudoku.genresolvar.Reductive;
 import org.pmg.jms.sudoku.genresolvar.ResolveUnitB1;
 import org.pmg.jms.sudoku.genresolvar.ResponseUnitB1;
 import org.pmg.jms.sudoku.genresolvar.TrialAgent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
+ * SudokuModel wraps clientPeer which is a JMS component container that handles 
+ * lifeCycle creation and completion. Guice provides DI best practice. Guice
+ * scoping provides containerized sharing for global beans
  * @author peter
  */
 public class SudokuModel extends AbstractLifeCycle {
     
-    private static final Logger LOG = LoggerFactory.getLogger(SudokuModel.class);
     private final JmsClientScope jmsScope;
     private final SudokuModelScope modelScope;
     private final PeerFactory peerFactory;

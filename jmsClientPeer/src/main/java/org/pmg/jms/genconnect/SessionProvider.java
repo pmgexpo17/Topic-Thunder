@@ -21,10 +21,8 @@ import javax.jms.JMSException;
 /**
  * Extends special Guice interface for provider exception handling
  * @author Peter A McGill
- * @param <SessionAgent>
  */
-public interface SessionProvider<SessionAgent> 
-                                        extends CheckedProvider<SessionAgent> {
+public interface SessionProvider extends CheckedProvider<SessionAgent> {
     
     @Override
     public SessionAgent get() throws JMSException;
