@@ -24,14 +24,14 @@ Setup Instructions :
   a. make sure activemq is not running, run : sudo service activemq status
     i. to stop run : sudo service activemq stop
   b. copy Jms-WebClient-Model-V1.jar to /opt/activemq/lib
-  b. in /opt/activemq/webapps create a new folder called TopicThunder
-  c. copy the TopicThunder webapp package content into this folder
+  c. in /opt/activemq/webapps create a new folder called TopicThunder
+  d. copy the TopicThunder webapp package content into this folder
     i. apply the same owner and group as the activemq root folder
-  d. update the jetty conf file : /opt/activemq/conf/jetty.xml, see Appendix A
-  e. start activemq : sudo service activemq start
-  f. at this point, make sure Topic Thunder Game Station is running
+  e. update the jetty conf file : /opt/activemq/conf/jetty.xml, see Appendix A
+  f. start activemq : sudo service activemq start
+  g. at this point, make sure Topic Thunder Game Station is running
     i. see Netbeans project setup instructions
-  g. point your web browser to : http://localhost:8161/TopicThunder/
+  h. point your web browser to : http://localhost:8161/TopicThunder/
     i. the home page provides sudoku puzzle samples which have a predefined format
     ii. paste your start map into the text box and click 'Load Start Pattern'
     iii. click 'Start Game', then wait for the solution to appear
