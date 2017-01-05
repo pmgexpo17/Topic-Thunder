@@ -16,7 +16,7 @@
 package org.pmg.jms.gensudoku.genprofile;
 
 /**
- *
+ * Profile for SQUC1
  * @author peter
  */
 public class ProfileSquC1 implements Profile {

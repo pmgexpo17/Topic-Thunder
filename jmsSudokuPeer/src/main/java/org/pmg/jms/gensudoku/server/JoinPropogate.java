@@ -16,7 +16,6 @@
 package org.pmg.jms.gensudoku.server;
 
 import com.google.inject.Inject;
-import java.util.HashMap;
 import java.util.concurrent.Executor;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -31,12 +30,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Handles message routing which is mapped to JoinResponder
  * @author peter
  */
 public class JoinPropogate implements Deliverable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JoinPropogate.class);
+    private static final 
+                    Logger LOG = LoggerFactory.getLogger(JoinPropogate.class);
     private final String className = getClass().getSimpleName();
     private final Controller controller;
     private String routeId;

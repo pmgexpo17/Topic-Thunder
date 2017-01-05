@@ -35,7 +35,7 @@ import org.pmg.jms.gensudoku.director.ResponseUnitA1;
 import org.pmg.jms.gensudoku.server.JoinPropogate;
 
 /**
- *
+ * Guice bindings and JMS config providers
  * @author peter
  */
 public class GameModule extends AbstractModule {

@@ -1,8 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * Copyright (c) 2016 Peter A McGill
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License. 
+**/
 package org.pmg.jms.gensudoku.director;
 
 import com.google.inject.Inject;
@@ -13,16 +23,14 @@ import org.pmg.jms.genbase.AbstractLifeCycle;
 import org.pmg.jms.gendirector.ClientState;
 import org.pmg.jms.gendirector.Quicken;
 import org.pmg.jms.gendirector.Respondar;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Maps ClientState.transition to message delivery actions. Delegates message
+ * delivery for companion state machine lifeCycle iteration.
  * @author peter
  */
 public class ResponseUnitA1 extends AbstractLifeCycle implements Respondar {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ResponseUnitA1.class);
     private static final int HIGH_PRIORITY = 9;
     private static final int MEDIUM_PRIORITY = 6;
     private final String className = getClass().getSimpleName();
@@ -101,7 +109,7 @@ public class ResponseUnitA1 extends AbstractLifeCycle implements Respondar {
 
         responder.putXmlSolution();
         responder.putMonitorAction("reset",HIGH_PRIORITY);
-        responder.putControlAction("reset");
+        //responder.putControlAction("reset");
     };
     
     Quicken default_trial = () -> {

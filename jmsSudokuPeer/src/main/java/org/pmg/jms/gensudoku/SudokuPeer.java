@@ -31,16 +31,15 @@ import org.pmg.jms.gendirector.AppDirector;
 import org.pmg.jms.gendirector.Statement;
 import org.pmg.jms.gensudoku.director.ResolveUnitA1;
 import org.pmg.jms.gensudoku.director.ResponseUnitA1;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
+ * SudokuPeer wraps clientPeer which is a JMS component container that handles 
+ * lifeCycle creation and completion. Guice provides DI best practice. Guice
+ * scoping provides containerized sharing for global beans
  * @author peter
  */
 public class SudokuPeer extends AbstractLifeCycle {
     
-    private static final Logger LOG = LoggerFactory.getLogger(SudokuPeer.class);
     private final String className = getClass().getSimpleName();
     private final JmsClientScope scope;
     private ServicePeer clientPeer;

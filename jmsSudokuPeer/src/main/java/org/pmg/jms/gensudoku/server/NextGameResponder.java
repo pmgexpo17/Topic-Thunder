@@ -25,18 +25,17 @@ import javax.jms.MapMessage;
 import javax.jms.Queue;
 import org.pmg.jms.genclient.ClientResponder;
 import org.pmg.jms.genclient.Routable;
-import org.pmg.jms.genconnect.OpenWireSessionPrvdr;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.pmg.jms.genconnect.OpenWire;
+import org.pmg.jms.genconnect.SessionProvider;
 
 /**
- *
+ * Handles startMap delivery to the game director, provided by the webClient
+ * servlet component. Also handles timeout termination of the current game.
  * @author peter
  */
 public class NextGameResponder extends ClientResponder implements Runnable {
-    private static final Logger LOG = 
-                               LoggerFactory.getLogger(NextGameResponder.class);    
-    private static final int MESSAGE_LIFESPAN = 3000;// milliseconds (3 seconds)
+
+    private static final int MESSAGE_LIFESPAN = 3000;// 3 seconds
     private static final int HIGH_PRIORITY = 9;
     private final String sessionId;
     private final int sessionNum;
@@ -46,9 +45,9 @@ public class NextGameResponder extends ClientResponder implements Runnable {
     private Routable delegate;
 
     @Inject
-    public NextGameResponder(OpenWireSessionPrvdr sessionProvider,
+    public NextGameResponder(@OpenWire SessionProvider sessionPrvdr,
                                                   @Assisted String sessionId) {
-        super(sessionProvider);
+        super(sessionPrvdr);
         this.sessionId = sessionId;
         sessionNum = 
            Integer.valueOf(sessionId.substring(sessionId.indexOf("session")+7));

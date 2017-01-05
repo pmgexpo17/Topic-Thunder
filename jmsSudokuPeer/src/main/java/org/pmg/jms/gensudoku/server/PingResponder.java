@@ -23,26 +23,24 @@ import javax.jms.Queue;
 import javax.jms.TextMessage;
 import org.apache.activemq.MessageAvailableListener;
 import org.pmg.jms.genclient.ClientMember;
-import org.pmg.jms.genconnect.OpenWireSessionPrvdr;
+import org.pmg.jms.genconnect.OpenWire;
+import org.pmg.jms.genconnect.SessionProvider;
 import org.pmg.jms.genhandler.XStreamHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Delivers a ping message response to ping requests by webClient initialization
  * @author peter
  */
 public class PingResponder extends ClientMember implements 
                                                     MessageAvailableListener {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PingResponder.class);
     private final XStreamHandler xmlHandler = new XStreamHandler();
     private MessageProducer respondant;
 
     @Inject
-    public PingResponder(OpenWireSessionPrvdr sessionProvider) {
+    public PingResponder(@OpenWire SessionProvider sessionPrvdr) {
 
-        super(sessionProvider);
+        super(sessionPrvdr);
     }
         
     @Override

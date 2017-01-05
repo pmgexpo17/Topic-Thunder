@@ -37,16 +37,14 @@ import org.pmg.jms.genconnect.OpenWire;
 import org.pmg.jms.gendirector.Controller;
 import org.pmg.jms.gensudoku.GamePropogate;
 import org.pmg.jms.gensudoku.MessageProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Manages sudoku solver game service, where server capacity is setup by the 
+ * Topic Thunder main program 
  * @author peter
  */
 public class GameServer extends AbstractLifeCycle implements GameService {
     
-    private static final Logger LOG = LoggerFactory.getLogger(GameServer.class);
     private final String className = getClass().getSimpleName();
     private final JmsClientScope scope;
     private ServicePeer clientPeer;
