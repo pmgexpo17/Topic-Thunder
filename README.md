@@ -2,10 +2,13 @@
 A JMS integration demo application that implements a Sudoku puzzle solving webapp service
 
 System Requirements :
+
 1. JDK 1.8
   a. lambda expresssions were introduced in Java 8
+  
 2. ActiveMQ 
   a. minimum version 5.10.0
+  
 3. Java project IDE with Maven module extension
   b. recommended : Netbeans 8.1
 
