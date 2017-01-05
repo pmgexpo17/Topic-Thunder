@@ -63,7 +63,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.pmg.jms.sudoku.Gamitron</mainClass>
+                            <mainClass>org.pmg.jms.sudoku.service.GameStation</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
