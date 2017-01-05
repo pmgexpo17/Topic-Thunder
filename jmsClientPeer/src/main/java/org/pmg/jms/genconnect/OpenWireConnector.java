@@ -21,11 +21,9 @@ import javax.jms.JMSException;
 import javax.jms.Session;
 import org.pmg.jms.genconfig.JmsClientScoped;
 import org.pmg.jms.genbase.AbstractLifeCycle;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * OpenWire Connector lifecycle is a sessionAgent provider component. (see
+ * OpenWire Connector is a sessionAgent provider component. (see
  * OpenWireSessionPrvdr) SessionAgent is a decorated session with transport 
  * specific convenience methods for queue and topic creation
  * @author peter
@@ -33,13 +31,12 @@ import org.slf4j.LoggerFactory;
 @JmsClientScoped
 public class OpenWireConnector extends AbstractLifeCycle implements Connector {
     
-    private static final Logger LOG = 
-                                LoggerFactory.getLogger(OpenWireConnector.class);
     private Connection connection;
     private final String transportName = "OpenWire";
     
     @Inject
-    public OpenWireConnector(@OpenWire ConnectionProvider<Connection> provider) {
+    public OpenWireConnector(@OpenWire 
+                                    ConnectionProvider<Connection> provider) {
         
         try {
             connection = provider.get();

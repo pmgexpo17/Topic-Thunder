@@ -20,7 +20,7 @@ import java.util.HashMap;
 /**
  * For ClientPeer webapp integration. A web client delivered XML text message is 
  * converted to a JmsAjaxBean for delivery to a JMS consumer by a JMS servlet  
- * extension, see https://github.com/gilmarie/TopicThunder
+ * extension
  * @author Peter A McGill
  */
 

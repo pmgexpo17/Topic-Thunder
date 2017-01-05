@@ -19,8 +19,8 @@ import javax.jms.JMSException;
 import org.pmg.jms.genbase.LifeCycle;
 
 /**
- * Connector lifeCycle interface which is a sessionAgent provider component (see 
- * OpenWireSessionPrvdr) SessionAgent is a decorated session with transport
+ * Connector lifeCycle interface which is a sessionAgent provider component  
+ * (see OpenWireSessionPrvdr) SessionAgent is a decorated session with transport
  * specific convenience methods for queue and topic creation
  * @author Peter A McGill
  */

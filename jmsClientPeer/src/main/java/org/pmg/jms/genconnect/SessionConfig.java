@@ -23,5 +23,5 @@ package org.pmg.jms.genconnect;
 public class SessionConfig {
     
     public Boolean transacted = false;
-    public int acknowledgeMode = 0; //javax.jms.Session.AUTO_ACKNOWLEDGE;
+    public int acknowledgeMode = 0; // eg javax.jms.Session.AUTO_ACKNOWLEDGE
 }

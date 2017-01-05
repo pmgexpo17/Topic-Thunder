@@ -16,23 +16,21 @@
 package org.pmg.jms.genhandler;
 
 import java.util.HashMap;
+import java.util.Map;
 import javax.jms.JMSException;
 import org.pmg.jms.genbase.AbstractLifeCycle;
 import org.pmg.jms.genclient.Routable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * A handler collection stores all handlers for a ClientPeer application
- * A handler is referenced by a routeId, which is a URI
+ * A handler is referenced by routeId, which is a URI
  * eg routeId = /myapp/state/action/method
  * @author Peter A McGill
  */
 public abstract class AbstractHandlerCollection extends AbstractLifeCycle 
                                         implements Handler, HandlerCollection {
-    private static final Logger LOG = 
-                       LoggerFactory.getLogger(AbstractHandlerCollection.class);
-    protected HashMap<String,Handler> handlers = new HashMap<>();
+
+    protected Map<String,Handler> handlers = new HashMap<>();
     protected Handler defaultHandler;
     protected String className = getClass().getSimpleName();
 
@@ -60,7 +58,7 @@ public abstract class AbstractHandlerCollection extends AbstractLifeCycle
     }
 
     @Override
-    public HashMap<String,Handler> getHandlers() {
+    public Map<String,Handler> getHandlers() {
         
         return handlers;
     }

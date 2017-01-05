@@ -37,7 +37,8 @@ public class JmsAjaxBeanConvertar implements Converter {
     }
 
         @Override
-        public void marshal(Object value, HierarchicalStreamWriter writer, MarshallingContext context) {
+        public void marshal(Object value, HierarchicalStreamWriter writer, 
+                                                MarshallingContext context) {
 
             JmsAjaxBean bean = (JmsAjaxBean) value;
             writer.addAttribute("from",bean.getFrom());
@@ -58,7 +59,8 @@ public class JmsAjaxBeanConvertar implements Converter {
         }
 
         @Override
-        public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+        public Object unmarshal(HierarchicalStreamReader reader, 
+                                                UnmarshallingContext context) {
 
             JmsAjaxBean bean = new JmsAjaxBean();            
             String key = null;

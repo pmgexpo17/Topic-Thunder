@@ -28,7 +28,4 @@ import org.pmg.jms.genclient.Routable;
 public interface Handler extends LifeCycle, Destroyable {
 
     public void handle(Routable delegate) throws JMSException;
-
-    @Override
-    public void destroy();
 }

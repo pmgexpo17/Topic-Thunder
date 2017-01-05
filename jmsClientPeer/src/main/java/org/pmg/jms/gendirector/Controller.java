@@ -16,6 +16,7 @@
 package org.pmg.jms.gendirector;
 
 import java.util.concurrent.Executor;
+import org.pmg.jms.genbase.Destroyable;
 import org.pmg.jms.genbase.LifeCycle;
 import org.pmg.jms.genclient.Routable;
 import org.pmg.jms.genhandler.HandlerCollection;
@@ -24,11 +25,10 @@ import org.pmg.jms.genhandler.HandlerCollection;
  * AppController is the engine for ClientPeer runnable task execution
  * @author Peter A McGill
  */
-public interface Controller extends LifeCycle {
+public interface Controller extends LifeCycle, Destroyable {
     
     public HandlerCollection getRouter();
     public void runApp(Routable delegate);
     public Executor getExecutor();
-    public void destroy();
     public void showAllRoutes();    
 }

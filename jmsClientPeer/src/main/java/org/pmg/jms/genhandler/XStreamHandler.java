@@ -28,7 +28,8 @@ import org.slf4j.LoggerFactory;
  * @author Peter A McGill
  */
 public class XStreamHandler {
-    private static final Logger LOG = LoggerFactory.getLogger(XStreamHandler.class);
+    private static final Logger LOG = 
+                                LoggerFactory.getLogger(XStreamHandler.class);
     protected XStream xstream = getXstreamObject();
 
     private static XStream getXstreamObject() {
@@ -51,10 +52,11 @@ public class XStreamHandler {
         try {
             if (txtMessage.getText().isEmpty())
                 return null;
-            String ajaxXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + txtMessage.getText();
+            String ajaxXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
+                                                        txtMessage.getText();
             return (JmsAjaxBean) xstream.fromXML(ajaxXml);
         } catch (JMSException ex) {
-            LOG.error("[XStreamHandler] Error converting XML to JmsAjaxBean",ex);
+           LOG.error("[XStreamHandler] Error converting XML to JmsAjaxBean",ex);
         }
         return null;        
     }
@@ -67,6 +69,5 @@ public class XStreamHandler {
         if (xmlText .contains("<?xml"))
             return xmlText.substring(xmlText.indexOf("?>")+2);
         return xmlText;
-    }    
-    
+    }
 }

@@ -23,7 +23,7 @@ import com.google.inject.Scope;
 import java.util.Map;
 
 /**
- * Required for dependant objects to share global components, ie, Connector and
+ * Required for dependant objects to share global beans, ie, Connector and
  * AppController
  * Sourced from https://github.com/google/guice/wiki/CustomScopes
  */

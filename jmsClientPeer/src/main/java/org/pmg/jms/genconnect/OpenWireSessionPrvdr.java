@@ -23,7 +23,7 @@ import javax.jms.JMSException;
  * an OpenWire sessionAgent
  * @author Peter A McGill
  */
-public class OpenWireSessionPrvdr implements SessionProvider<SessionAgent> {
+public class OpenWireSessionPrvdr implements SessionProvider {
 
     private final Connector connector;
     private final Boolean transacted;

@@ -18,28 +18,23 @@ package org.pmg.jms.genclient;
 import com.google.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
-import static org.pmg.jms.genbase.AbstractLifeCycle.STARTED;
 import org.pmg.jms.genbase.ContainerLifeCycle;
 import org.pmg.jms.genbase.LifeCycle;
 import org.pmg.jms.genbase.MultiException;
 import org.pmg.jms.genbase.ShutdownThread;
 import org.pmg.jms.genbase.Uptime;
 import org.pmg.jms.genconnect.Connector;
-import org.pmg.jms.genconnect.OpenWire;
 import org.pmg.jms.gendirector.Controller;
 import org.pmg.jms.genhandler.Handler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * ClientPeer is a jms component container, which handles lifecycle creation
+ * ClientPeer is a JMS component container, which handles lifeCycle creation
  * and completion. 
  * @author Peter A McGill
  */
 
 public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ClientPeer.class);
     private final String className = getClass().getSimpleName();
     protected Controller controller;
     protected final Map<String,Connector> connectors = new HashMap<>();    
@@ -76,22 +71,20 @@ public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
     }
 
     @Override
-    protected void doStart() throws Exception
-    {        
-        //If the Server should be stopped when the jvm exits, register
-        //with the shutdown handler thread.
+    protected void doStart() throws Exception {        
+        
+        // if the client should be stopped when the jvm exits, register
+        // with the shutdown handler thread.
         ShutdownThread.register((LifeCycle) this);
 
-        LOG.info("ClientPeer : " + getVersion());
+        LOG.info("[{}] Starting ...",className);
         
         MultiException mex = new MultiException();
         
-        try
-        {
+        try {
             super.doStart();
         }
-        catch(Throwable ex)
-        {
+        catch(Throwable ex) {
             mex.add(ex);
         }
 
@@ -100,21 +93,21 @@ public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
 
         mex.ifExceptionThrow();
 
-        LOG.info("[ClientPeer] Started @{}ms",Uptime.getUptime());
+        LOG.info("[{}] Started @{}ms",className,Uptime.getUptime());
     }
 
     @Override
-    protected void doStop() throws Exception
-    {
+    protected void doStop() throws Exception {
+        
         MultiException mex=new MultiException();
         
+        LOG.info("[{}] Stopping ...",className);
+        
         // And finally stop everything else
-        try
-        {
+        try {
             super.doStop();
         }
-        catch (Throwable e)
-        {
+        catch (Throwable e) {
             mex.add(e);
         }
 
@@ -123,16 +116,14 @@ public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
 
         ShutdownThread.deregister(this);
         
-        //controller.stop();
-                
         mex.ifExceptionThrow();
         
-        LOG.info("[ClientPeer] Stopped @{}ms",Uptime.getUptime());
+        LOG.info("[{}] Stopped @{}ms",className,Uptime.getUptime());
     }
 
     @Override
-    public void destroy()
-    {
+    public void destroy() {
+        
         if (!isStopped())
             throw new IllegalStateException("!STOPPED");
         super.destroy();
@@ -146,13 +137,8 @@ public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
      * @see org.eclipse.jetty.util.component.ContainerLifeCycle#setStopTimeout(long)
      */
     @Override
-    public void setStopTimeout(long stopTimeout)
-    {
+    public void setStopTimeout(long stopTimeout) {
+        
         super.setStopTimeout(stopTimeout);
-    }
-
-    public static String getVersion()
-    {
-        return "2.0";
     }
 }

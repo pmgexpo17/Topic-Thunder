@@ -7,17 +7,15 @@ package org.pmg.jms.genhandler;
 
 import javax.jms.JMSException;
 import org.pmg.jms.genclient.Routable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
+ * A handler is a JMS application component mapped by routeId
+ * The handler behaviour can be chained by changing the routeId which points
+ * to the next handler
  * @author peter
  */
 public class RouteHandler extends AbstractHandlerCollection {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RouteHandler.class);
-    
     @Override
     public void handle(Routable delegate) throws JMSException {
 

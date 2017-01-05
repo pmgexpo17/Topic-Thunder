@@ -19,7 +19,7 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 
 /**
- - The subject of AppController execution when extended with Runnable
+ - The subject of Controller execution when extended with Runnable
  - Routable defines ClientPeer message exchange protocol
  - Received message is immutable, ie, read-only
    @author Peter A McGill
