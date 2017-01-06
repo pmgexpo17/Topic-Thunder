@@ -23,42 +23,44 @@ import java.lang.reflect.Method;
  * compact profiles
  * Sourced from https://github.com/eclipse/jetty.project 
  */
-public class Uptime
-{
+public class Uptime {
+    
     public static final int NOIMPL = -1;
 
-    public static interface Impl
-    {
+    public static interface Impl {
+        
         public long getUptime();
     }
 
-    public static class DefaultImpl implements Impl
-    {
+    public static class DefaultImpl implements Impl {
+        
         public Object mxBean;
         public Method uptimeMethod;
 
-        public DefaultImpl()
-        {
+        public DefaultImpl() {
+            
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
-            try
-            {
-                Class<?> mgmtFactory = Class.forName("java.lang.management.ManagementFactory",true,cl);
-                Class<?> runtimeClass = Class.forName("java.lang.management.RuntimeMXBean",true,cl);
+            try {
+                String klassName = "java.lang.management.ManagementFactory";
+                Class<?> mgmtFactory = Class.forName(klassName,true,cl);
+                klassName = "java.lang.management.RuntimeMXBean";
+                Class<?> runtimeClass = Class.forName(klassName,true,cl);
                 Class<?> noparams[] = new Class<?>[0];
-                Method mxBeanMethod = mgmtFactory.getMethod("getRuntimeMXBean",noparams);
-                if (mxBeanMethod == null)
-                {
-                    throw new UnsupportedOperationException("method getRuntimeMXBean() not found");
+                Method mxBeanMethod = 
+                            mgmtFactory.getMethod("getRuntimeMXBean",noparams);
+                if (mxBeanMethod == null) {
+                    String lognote = "method getRuntimeMXBean() not found";
+                    throw new UnsupportedOperationException(lognote);
                 }
                 mxBean = mxBeanMethod.invoke(mgmtFactory);
-                if (mxBean == null)
-                {
-                    throw new UnsupportedOperationException("getRuntimeMXBean() method returned null");
+                if (mxBean == null) {
+                    String lognote = "getRuntimeMXBean() method returned null";
+                    throw new UnsupportedOperationException(lognote);
                 }
                 uptimeMethod = runtimeClass.getMethod("getUptime",noparams);
-                if (mxBean == null)
-                {
-                    throw new UnsupportedOperationException("method getUptime() not found");
+                if (mxBean == null) {
+                    String lognote = "method getUptime() not found";
+                    throw new UnsupportedOperationException(lognote);
                 }
             }
             catch (ClassNotFoundException | 
@@ -67,21 +69,20 @@ public class Uptime
                    SecurityException | 
                    IllegalAccessException | 
                    IllegalArgumentException | 
-                   InvocationTargetException e)
-            {
-                throw new UnsupportedOperationException("Implementation not available in this environment",e);
+                   InvocationTargetException e) {
+                String lognote = 
+                            "Implementation not available in this environment";
+                throw new UnsupportedOperationException(lognote,e);
             }
         }
 
         @Override
-        public long getUptime()
-        {
-            try
-            {
+        public long getUptime() {
+            
+            try {
                 return (long)uptimeMethod.invoke(mxBean);
             }
-            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-            {
+            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                 return NOIMPL;
             }
         }
@@ -89,41 +90,40 @@ public class Uptime
 
     private static final Uptime INSTANCE = new Uptime();
 
-    public static Uptime getInstance()
-    {
+    public static Uptime getInstance() {
+        
         return INSTANCE;
     }
 
     private Impl impl;
 
-    private Uptime()
-    {
-        try
-        {
+    private Uptime() {
+        
+        try {
             impl = new DefaultImpl();
         }
-        catch (UnsupportedOperationException e)
-        {
-            System.err.printf("Defaulting Uptime to NOIMPL due to (%s) %s%n",e.getClass().getName(),e.getMessage());
+        catch (UnsupportedOperationException e) {
+            
+            String lognote = "Defaulting Uptime to NOIMPL due to (%s) %s%n";
+            System.err.printf(lognote,e.getClass().getName(),e.getMessage());
             impl = null;
         }
     }
 
-    public Impl getImpl()
-    {
+    public Impl getImpl() {
+        
         return impl;
     }
 
-    public void setImpl(Impl impl)
-    {
+    public void setImpl(Impl impl) {
+        
         this.impl = impl;
     }
 
-    public static long getUptime()
-    {
+    public static long getUptime() {
+        
         Uptime u = getInstance();
-        if (u == null || u.impl == null)
-        {
+        if (u == null || u.impl == null) {
             return NOIMPL;
         }
         return u.impl.getUptime();

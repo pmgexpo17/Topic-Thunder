@@ -21,8 +21,8 @@ import java.util.EventListener;
  * The lifecycle interface for generic components.
  * Sourced from https://github.com/eclipse/jetty.project 
  */
-public interface LifeCycle
-{
+public interface LifeCycle {
+    
     public void start() throws Exception;
     public void stop() throws Exception;
     public boolean isRunning();
@@ -37,8 +37,8 @@ public interface LifeCycle
     /** 
      * A listener for Lifecycle events.
      */
-    public interface Listener extends EventListener
-    {
+    public interface Listener extends EventListener {
+        
         public void lifeCycleStarting(LifeCycle event);
         public void lifeCycleStarted(LifeCycle event);
         public void lifeCycleFailure(LifeCycle event,Throwable cause);

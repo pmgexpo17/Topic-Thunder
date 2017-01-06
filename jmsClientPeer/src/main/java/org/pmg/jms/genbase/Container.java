@@ -18,11 +18,10 @@ package org.pmg.jms.genbase;
 import java.util.Collection;
 
 /**
- * A container of java beans for lifecycle management
+ * A java bean container for lifecycle management
  * Sourced from https://github.com/eclipse/jetty.project 
  */
-public interface Container
-{
+public interface Container {
     /* ------------------------------------------------------------ */
     /**
      * Add a bean.  If the bean is-a {@link Listener}, then also do an implicit {@link #addEventListener(Listener)}.
@@ -76,8 +75,8 @@ public interface Container
      * If an added bean implements this interface it will receive the events
      * for this container.
      */
-    public interface Listener
-    {
+    public interface Listener {
+        
         void beanAdded(Container parent,Object child);
         void beanRemoved(Container parent,Object child);
     }
@@ -87,7 +86,5 @@ public interface Container
      * If an added bean implements this interface, then it will 
      * be added to all contained beans that are themselves Containers
      */
-    public interface InheritedListener extends Listener
-    {
-    }
+    public interface InheritedListener extends Listener {}
 }

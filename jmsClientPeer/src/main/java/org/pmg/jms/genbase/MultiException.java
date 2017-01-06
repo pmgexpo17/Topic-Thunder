@@ -26,27 +26,26 @@ import java.util.List;
  * Sourced from https://github.com/eclipse/jetty.project 
  */
 @SuppressWarnings("serial")
-public class MultiException extends Exception
-{
+public class MultiException extends Exception {
+    
     private List<Throwable> nested;
 
     /* ------------------------------------------------------------ */
-    public MultiException()
-    {
+    public MultiException() {
+        
         super("Multiple exceptions");
     }
 
     /* ------------------------------------------------------------ */
-    public void add(Throwable e)
-    {
+    public void add(Throwable e) {
+        
         if (e==null)
             throw new IllegalArgumentException();
         
         if(nested == null)
             nested = new ArrayList<>();
         
-        if (e instanceof MultiException)
-        {
+        if (e instanceof MultiException) {
             MultiException me = (MultiException)e;
             nested.addAll(me.nested);
         }
@@ -55,14 +54,14 @@ public class MultiException extends Exception
     }
 
     /* ------------------------------------------------------------ */
-    public int size()
-    {
+    public int size() {
+        
         return (nested ==null)?0:nested.size();
     }
     
     /* ------------------------------------------------------------ */
-    public List<Throwable> getThrowables()
-    {
+    public List<Throwable> getThrowables() {
+        
         if(nested == null) {
             return Collections.emptyList();
         }
@@ -70,8 +69,8 @@ public class MultiException extends Exception
     }
     
     /* ------------------------------------------------------------ */
-    public Throwable getThrowable(int i)
-    {
+    public Throwable getThrowable(int i) {
+        
         return nested.get(i);
     }
 
@@ -82,14 +81,12 @@ public class MultiException extends Exception
      * multi exception is thrown. 
      * @exception Exception 
      */
-    public void ifExceptionThrow()
-        throws Exception
-    {
-        if(nested == null)
+    public void ifExceptionThrow() throws Exception {
+        
+        if (nested == null)
             return;
         
-        switch (nested.size())
-        {
+        switch (nested.size()) {
           case 0:
               break;
           case 1:
@@ -112,14 +109,12 @@ public class MultiException extends Exception
      * @exception RuntimeException If this exception contains 1 {@link Throwable} but it is not an error,
      *                             or it contains more than 1 {@link Throwable} of any type.
      */
-    public void ifExceptionThrowRuntime()
-        throws Error
-    {
-        if(nested == null)
+    public void ifExceptionThrowRuntime() throws Error {
+        
+        if (nested == null)
             return;
         
-        switch (nested.size())
-        {
+        switch (nested.size()) {
           case 0:
               break;
           case 1:
@@ -141,10 +136,9 @@ public class MultiException extends Exception
      * contains a any exceptions then this
      * multi exception is thrown. 
      */
-    public void ifExceptionThrowMulti()
-        throws MultiException
-    {
-        if(nested == null)
+    public void ifExceptionThrowMulti() throws MultiException {
+        
+        if (nested == null)
             return;
         
         if (nested.size()>0)
@@ -153,8 +147,8 @@ public class MultiException extends Exception
 
     /* ------------------------------------------------------------ */
     @Override
-    public String toString()
-    {
+    public String toString() {
+        
         StringBuilder str = new StringBuilder();
         str.append(MultiException.class.getSimpleName());
         if((nested == null) || (nested.size()<=0)) {
@@ -167,8 +161,8 @@ public class MultiException extends Exception
 
     /* ------------------------------------------------------------ */
     @Override
-    public void printStackTrace()
-    {
+    public void printStackTrace() {
+        
         super.printStackTrace();
         if(nested != null) {
             for(Throwable t: nested) {
@@ -176,15 +170,14 @@ public class MultiException extends Exception
             }
         }
     }
-   
 
     /* ------------------------------------------------------------------------------- */
     /**
      * @see java.lang.Throwable#printStackTrace(java.io.PrintStream)
      */
     @Override
-    public void printStackTrace(PrintStream out)
-    {
+    public void printStackTrace(PrintStream out) {
+        
         super.printStackTrace(out);
         if(nested != null) {
             for(Throwable t: nested) {
@@ -198,8 +191,8 @@ public class MultiException extends Exception
      * @see java.lang.Throwable#printStackTrace(java.io.PrintWriter)
      */
     @Override
-    public void printStackTrace(PrintWriter out)
-    {
+    public void printStackTrace(PrintWriter out) {
+        
         super.printStackTrace(out);
         if(nested != null) {
             for(Throwable t: nested) {
