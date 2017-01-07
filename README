@@ -1,10 +1,10 @@
 # Topic-Thunder
-A JMS integration demo application that implements a Sudoku puzzle solving webapp service
+A JMS integration demo application that delivers a Sudoku puzzle solving webapp service
 
 System Requirements :
 
 1. JDK 1.8
-  a. required lambda expresssions were introduced in Java 8
+  a. required lambda expressions were introduced in Java 8
   
 2. ActiveMQ 
   a. minimum version 5.10.0
