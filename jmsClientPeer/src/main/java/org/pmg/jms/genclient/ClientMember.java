@@ -68,6 +68,7 @@ public class ClientMember extends AbstractLifeCycle implements Membership {
     protected void doStop() throws JMSException, Exception
     {
         LOG.debug("[{}] is stopping",className);
+        sessionAgent.stop();
         if (consumer != null)
            consumer.close();
     }

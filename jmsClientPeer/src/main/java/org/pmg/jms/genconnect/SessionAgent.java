@@ -20,12 +20,13 @@ import javax.jms.JMSException;
 import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.Topic;
+import org.pmg.jms.genbase.LifeCycle;
 
 /**
  * Defines session agent works
  * @author Peter A McGill
  */
-public interface SessionAgent {
+public interface SessionAgent extends LifeCycle {
 
     public Queue createQueue(String queueName) throws JMSException;
     public Topic createTopic(String topicName) throws JMSException;

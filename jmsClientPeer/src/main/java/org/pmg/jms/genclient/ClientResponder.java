@@ -108,6 +108,7 @@ public class ClientResponder extends AbstractLifeCycle implements Responsive {
     protected void doStop() throws JMSException, Exception
     {
         LOG.debug("[{}] is stopping",className);
+        sessionAgent.stop();
         for (String destName: pcache.keySet())
             pcache.get(destName).producer.close();
     }
