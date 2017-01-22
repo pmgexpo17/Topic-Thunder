@@ -11,7 +11,8 @@ categories: JMS container
 public void addConnector(Connector connector);
 {% endhighlight %}
 
-Added method content to ClientPeer
+* Added addConnector method to ClientPeer
+* Removed ClientPeer constructor @Inject annotation as descendent class does the injection
 
 {% highlight java %}
 protected final Map<String,Connector> connectors = new HashMap<>();    
