@@ -26,8 +26,8 @@ import org.pmg.jms.gendirector.Controller;
 import org.pmg.jms.genhandler.Handler;
 
 /**
- * ClientPeer is a JMS component container, which handles lifeCycle creation
- * and completion. 
+ * ClientPeer is a JMS component container, for JMS lifecycle management
+ * Extend ClientPeer to inject Connector and Controller concrete classes
  * @author Peter A McGill
  */
 
@@ -49,7 +49,6 @@ public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
         
         return connector;
     }
-
 
     @Override
     public Controller getController() {
