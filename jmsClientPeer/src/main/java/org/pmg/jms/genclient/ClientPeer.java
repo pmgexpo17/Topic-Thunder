@@ -15,7 +15,8 @@
 **/
 package org.pmg.jms.genclient;
 
-import com.google.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
 import org.pmg.jms.genbase.ContainerLifeCycle;
 import org.pmg.jms.genbase.LifeCycle;
 import org.pmg.jms.genbase.MultiException;
@@ -26,8 +27,8 @@ import org.pmg.jms.gendirector.Controller;
 import org.pmg.jms.genhandler.Handler;
 
 /**
- * ClientPeer is a JMS component container, for JMS lifecycle management
- * Extend ClientPeer to inject Connector and Controller concrete classes
+ * ClientPeer is a JMS component container, which handles lifeCycle creation
+ * and completion. 
  * @author Peter A McGill
  */
 
@@ -35,19 +36,26 @@ public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
 
     private final String className = getClass().getSimpleName();
     protected final Controller controller;
-    protected final Connector connector;
+    protected final Map<String,Connector> connectors = new HashMap<>();    
 
     public ClientPeer(Connector connector, Controller controller) {
 
-        this.connector = connector;
+        addConnector(connector);
         this.controller = controller;
         addBean(controller);        
     }
 
     @Override
-    public Connector getConnector() {
+    public final void addConnector(Connector connector) {
         
-        return connector;
+        String transportName = connector.getTransportName().toUpperCase();
+        connectors.put(transportName,connector);                
+    }
+    
+    @Override
+    public Connector getConnector(String transportName) {
+        
+        return connectors.get(transportName.toUpperCase());
     }
 
     @Override
@@ -83,7 +91,8 @@ public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
             mex.add(ex);
         }
 
-        connector.start();
+        for(String key: connectors.keySet())
+            connectors.get(key).start();
 
         mex.ifExceptionThrow();
 
@@ -105,7 +114,8 @@ public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
             mex.add(e);
         }
 
-        connector.stop();
+        for(String key: connectors.keySet())
+            connectors.get(key).stop();
 
         ShutdownThread.deregister(this);
         
