@@ -31,7 +31,7 @@ import org.pmg.jms.genhandler.Handler;
 public interface ServicePeer extends 
                                   Container, Destroyable, Dumpable, LifeCycle {
                                                         
-    public Connector getConnector(String transportName);
+    public Connector getConnector();
     public Controller getController();
     public void addHandler(String route,Handler handler);
 }
