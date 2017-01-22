@@ -22,7 +22,7 @@ import javax.jms.Session;
 import org.pmg.jms.genbase.LifeCycle;
 
 /**
- *
+ * Responsive is a JMS producer bean
  * @author peter
  */
 public interface Responsive extends LifeCycle {
