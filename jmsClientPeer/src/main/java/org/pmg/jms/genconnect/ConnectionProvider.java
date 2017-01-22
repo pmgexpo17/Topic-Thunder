@@ -16,15 +16,15 @@
 package org.pmg.jms.genconnect;
 
 import com.google.inject.throwingproviders.CheckedProvider;
+import javax.jms.Connection;
 import javax.jms.JMSException;
 
 /**
  * Extends special Guice interface for provider exception handling
  * @author Peter A McGill
- * @param <Connection> : JMS connection component
- */
-public interface ConnectionProvider<Connection> 
-                                        extends CheckedProvider<Connection> {
+  */
+public interface ConnectionProvider extends CheckedProvider<Connection> {
+    
     @Override
     public Connection get() throws JMSException;
     

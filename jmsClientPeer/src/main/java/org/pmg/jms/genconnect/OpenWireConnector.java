@@ -35,8 +35,7 @@ public class OpenWireConnector extends AbstractLifeCycle implements Connector {
     private final String transportName = "OpenWire";
     
     @Inject
-    public OpenWireConnector(@OpenWire 
-                                    ConnectionProvider<Connection> provider) {
+    public OpenWireConnector(@OpenWire ConnectionProvider provider) {
         
         try {
             connection = provider.get();

@@ -25,7 +25,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
  * Guiced Jms Connection provider for OpenWire transport
  * @author Peter A McGill
  */
-public class OpenWireConnectPrvdr implements ConnectionProvider<Connection> {
+public class OpenWireConnectPrvdr implements ConnectionProvider {
     
     private final ConnectionFactory connectionFactory;
     private final ActiveMQConfig config;

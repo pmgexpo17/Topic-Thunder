@@ -16,8 +16,6 @@
 package org.pmg.jms.genclient;
 
 import com.google.inject.Inject;
-import java.util.HashMap;
-import java.util.Map;
 import org.pmg.jms.genbase.ContainerLifeCycle;
 import org.pmg.jms.genbase.LifeCycle;
 import org.pmg.jms.genbase.MultiException;
@@ -36,22 +34,20 @@ import org.pmg.jms.genhandler.Handler;
 public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
 
     private final String className = getClass().getSimpleName();
-    protected Controller controller;
-    protected final Map<String,Connector> connectors = new HashMap<>();    
+    protected final Controller controller;
+    protected final Connector connector;
 
-    @Inject
     public ClientPeer(Connector connector, Controller controller) {
 
-        String transportName = connector.getTransportName().toUpperCase();
-        connectors.put(transportName,connector);        
+        this.connector = connector;
         this.controller = controller;
         addBean(controller);        
     }
 
     @Override
-    public Connector getConnector(String transportName) {
+    public Connector getConnector() {
         
-        return connectors.get(transportName.toUpperCase());
+        return connector;
     }
 
 
@@ -88,8 +84,7 @@ public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
             mex.add(ex);
         }
 
-        for(String key: connectors.keySet())
-            connectors.get(key).start();
+        connector.start();
 
         mex.ifExceptionThrow();
 
@@ -111,8 +106,7 @@ public class ClientPeer extends ContainerLifeCycle implements ServicePeer {
             mex.add(e);
         }
 
-        for(String key: connectors.keySet())
-            connectors.get(key).stop();
+        connector.stop();
 
         ShutdownThread.deregister(this);
         
