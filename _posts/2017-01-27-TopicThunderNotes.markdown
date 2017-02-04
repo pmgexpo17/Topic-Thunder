@@ -65,7 +65,7 @@ Diagram_2 shows TrialGovernor method expansion
 * gameIsStalled
 * hasTrialOption
 
-![diagram_1]({{ site.url }}/assets/trialGovernor01.png)
+![trialGovernor methods]({{ site.url }}/assets/trialGovernor01.png)
 
 ---
 ---
