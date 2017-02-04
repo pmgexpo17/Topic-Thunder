@@ -74,9 +74,26 @@ Topic Thunder is an JMS integration app which means 2 or more ClientPeers are co
 
 Therefore, state machine lifecycle and behaviour depends on integration
 
-With Java generics, create container installed objects just like a real device
+With Java generics, create container installed objects intuitively like a real device
 
 Let's review some installable state machine parts in the client-model package
 
 Generic class Director iterates the SM lifecycle
+
+{% highlight java %}
+    \@Override
+    public synchronized void handle(Routable delegate) throws JMSException {
+
+        try {
+            state.setDelegate(delegate);        
+            if (resolver.apply().hasNext())
+                responder.apply().respond();
+            state.iterate();
+        } catch(Exception ex) {
+            LOG.error("[Director] resolve exception",ex);
+            throw new JMSException(ex.getMessage());
+        }
+    }    
+{% endhighlight %}
+
 
