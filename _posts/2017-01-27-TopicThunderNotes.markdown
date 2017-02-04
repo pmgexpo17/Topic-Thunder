@@ -180,3 +180,121 @@ Respondar SM behavior is stored in a 1D map of Java 8 lambda code samples
 Quicken is a functional interface, declaring 1 method : respond
 
 Respondar depends on state.transtion to apply Quicken response behaviour
+
+{% highlight java %}
+
+public class ResolveUnitB1 implements Resolvar {
+
+    ...
+    
+    @Override
+    public Resolve apply() throws JMSException {
+        
+        state.action = state.delegate.getString("action");
+        state.delegate.setStatus(true);
+        return get();
+    }
+
+    @Override
+    public Resolve get() {
+
+        if (rcache.get(state.current).containsKey(state.action))
+            return rcache.get(state.current).get(state.action);
+        return unknown_action;
+    }
+
+    ...
+
+    /*
+     - state = trial-error
+     */
+    Resolve trial_retrial = () -> {
+     
+        LOG.debug("[{}[{}] got retrial notice",className,bean.peerId);
+        state.next = "trial";
+        state.transition = "trial_retrial";
+        return true;
+    };
+
+	...
+        
+    private HashMap<String,HashMap<String,Resolve>> loadCache() {
+
+        // state = ready
+        HashMap<String,HashMap<String,Resolve>> _rcache = new HashMap<>(4,1);
+        HashMap<String,Resolve> rmap = new HashMap<>(1,1);
+        rmap.put("preset",ready_preset);
+        _rcache.put("ready",rmap);
+        // state = resolve
+        rmap = new HashMap<>(6,1);
+        rmap.put("monitor",default_monitor);
+        rmap.put("query",default_query);
+        rmap.put("reset",default_reset);
+        rmap.put("resolve",resolve_resolve);
+        rmap.put("start",resolve_start);
+        rmap.put("trial",resolve_trial);
+        _rcache.put("resolve",rmap);
+        // state = trial
+        rmap = new HashMap<>(6,1);
+        rmap.put("error",trial_error);
+        rmap.put("monitor",default_monitor);
+        rmap.put("query",default_query);
+        rmap.put("reset",default_reset);
+        rmap.put("start",trial_start);
+        rmap.put("resolve",trial_resolve);
+        _rcache.put("trial",rmap);
+        // state = trial-error
+        rmap = new HashMap<>(5,1);
+        rmap.put("query",default_query);
+        rmap.put("reset",default_reset);
+        rmap.put("retrial",trial_retrial);
+        _rcache.put("trial-error",rmap);
+        return _rcache;
+    }
+}
+
+public class ResponseUnitB1 extends AbstractLifeCycle implements Respondar {
+
+	...
+
+    @Override
+    public Quicken apply() throws JMSException {
+
+        // state-transition is either self descriptive or it describes
+        // the action to do in the current state
+        LOG.debug("[{}] state transition : {}",className,state.transition);
+        return get();
+    }
+
+    @Override
+    public Quicken get() {
+        
+        if (rcache.containsKey(state.transition))
+            return rcache.get(state.transition);
+        return unknown_action;
+    }
+
+	...
+	
+    Quicken trial_retrial = () -> {
+        
+        responder.putControlAction("retrial");
+    };
+
+	...
+	
+    private HashMap<String,Quicken> loadCache() {
+
+        // state = ready
+        HashMap<String,Quicken> rmap = new HashMap<>(6,1);
+        rmap.put("default_error",default_error);
+        rmap.put("default_ready",default_ready);
+        rmap.put("default_resolve",default_resolve);
+        rmap.put("ready_resolve",ready_resolve);
+        rmap.put("stall_test",stall_test);
+        rmap.put("trial_error",trial_error);
+        rmap.put("trial_retrial",trial_retrial);
+        return rmap;
+    }
+}
+{% endhighlight %}
