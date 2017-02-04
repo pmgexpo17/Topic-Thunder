@@ -80,6 +80,7 @@ Let's review some installable state machine parts in the client-model package
 Generic class Director iterates the SM lifecycle
 
 {% highlight java %}
+
     @Override
     public synchronized void handle(Routable delegate) throws JMSException {
 
@@ -117,8 +118,8 @@ public class SudokuModule extends AbstractModule {
 
 	...
  
-	install(new FactoryModuleBuilder().
-	implement(ServicePeer.class, ClientPeerB1.class).
+    install(new FactoryModuleBuilder().
+    implement(ServicePeer.class, ClientPeerB1.class).
     implement(MessageRouter.class,
         new TypeLiteral<Messenger<MessageProvider,GamePropogate>>() {}).
     implement(ClientDirector.class,Names.named("monitor"),
