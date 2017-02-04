@@ -33,7 +33,8 @@ The Sudoku resolver brain is a state machine (SM), and like a brain has 2 parts!
 
 The right side : Resolvar, left side : Respondar
 
-Resolver legend :
+Resolver legend :  
+
 * resolveUnitA1, sudoku-client package, game moderator X 1
 * resolveUnitB1, sudoku-model package, sudoku resolver X 27
 * resolveUnitB2, sudoku-model package, trial-error monitor X 1
@@ -49,7 +50,8 @@ public class ResponseUnitB1 extends AbstractLifeCycle implements Respondar {
 }
 {% endhighlight %}
 
-Diagram_1 shows :
+Diagram_1 shows :  
+
 * Resolvar SM stall detection behaviour
 * Resolvar SM trial and error behaviour
 
@@ -58,7 +60,8 @@ Diagram_1 shows :
 ![diagram_1]({{ site.url }}/assets/diaLabel01.png)
 
 Trial-error monitor, resolveUnitB2 depends on TrialGovernor methods  
-Diagram_2 shows TrialGovernor method expansion
+Diagram_2 shows TrialGovernor method expansion  
+
 * gameIsStalled
 * hasTrialOption
 
