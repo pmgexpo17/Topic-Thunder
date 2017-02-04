@@ -55,9 +55,9 @@ Diagram_1 shows :
 * Resolvar SM stall detection behaviour
 * Resolvar SM trial and error behaviour
 
-![stall detection](/assets/stallTest01.png)
-![trial and error](/assets/trialError01.png)
-![diagram_1](/assets/diaLabel01.png)
+![stall detection]({{ site.baseurl }}/assets/stallTest01.png)
+![trial and error]({{ site.baseurl }}/assets/trialError01.png)
+![diagram_1]({{ site.baseurl }}/assets/diaLabel01.png)
 
 Trial-error monitor, resolveUnitB2 depends on TrialGovernor methods  
 Diagram_2 shows TrialGovernor method expansion  
@@ -65,7 +65,7 @@ Diagram_2 shows TrialGovernor method expansion
 * gameIsStalled
 * hasTrialOption
 
-![trialGovernor methods](/assets/trialGovernor01.png)
+![trialGovernor methods]({{ site.baseurl }}/assets/trialGovernor01.png)
 
 ---
 ---
