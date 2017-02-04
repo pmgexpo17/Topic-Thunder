@@ -9,8 +9,7 @@ TopicThunder is a JMS demo that showcases JMS container benefits for JMS integra
 
 About a year ago, I was doing Sudoku newspaper puzzles every day on my train ride home from work
 
-I made notes about solving patterns for hard puzzles but soon discovered there was no
-fun in that drudgery! 
+I made notes about solving patterns for hard puzzles but that quickly became too much bother! 
 
 One day had an idea that a JMS Sudoku puzzle topic would create a resolving chain reaction
 
@@ -81,7 +80,7 @@ Let's review some installable state machine parts in the client-model package
 Generic class Director iterates the SM lifecycle
 
 {% highlight java %}
-    \@Override
+    @Override
     public synchronized void handle(Routable delegate) throws JMSException {
 
         try {
@@ -96,4 +95,88 @@ Generic class Director iterates the SM lifecycle
     }    
 {% endhighlight %}
 
+Guice has a factory mechanism for building generic objects by declaring TypeLiteral bindings
 
+{% highlight java %}
+
+public interface PeerFactory {
+
+    ClientPeerB1 getClientPeer();
+    Messenger<MessageProvider,GamePropogate> getMessenger();
+    MultiMessenger<MessageProvider,GamePropogate> getMultiMessenger();
+    @Named("game") Director<ResolveUnitB1,ResponseUnitB1> getGameDirector();
+    @Named("monitor") Director<ResolveUnitB2,ResponseUnitB2> 
+                                            getAuxDirector(String sessionId);
+    TrialAgent getTrialAgent();
+}
+
+public class SudokuModule extends AbstractModule {
+
+  @Override
+  protected void configure() {
+
+	...
+ 
+	install(new FactoryModuleBuilder().
+	implement(ServicePeer.class, ClientPeerB1.class).
+    implement(MessageRouter.class,
+        new TypeLiteral<Messenger<MessageProvider,GamePropogate>>() {}).
+    implement(ClientDirector.class,Names.named("monitor"),
+        new TypeLiteral<Director<ResolveUnitB2,ResponseUnitB2>>() {}).
+    implement(ClientDirector.class,Names.named("game"),
+        new TypeLiteral<Director<ResolveUnitB1,ResponseUnitB1>>() {}).
+    build(PeerFactory.class));
+    
+	...
+}
+
+public class SudokuModel extends AbstractLifeCycle {
+
+    ...
+
+    public void configure(String sessionId) throws JMSException {
+
+        ...
+        Director<ResolveUnitB2,ResponseUnitB2> director = 
+                                        peerFactory.getAuxDirector(sessionId);
+        director.init();
+        String route = "/director/trial/monitor";        
+        clientPeer.addHandler(route,director);        
+        clientPeer.addBean(director);
+        ...
+    }
+    
+    private void addComponent(String peerId) throws JMSException {
+
+        ...
+        // ResponseUnitB1 producer internally configured
+        Director<ResolveUnitB1,ResponseUnitB1> director = 
+                                                peerFactory.getGameDirector();
+        director.init();
+        clientPeer.addBean(director);
+
+        String route = "/director/resolve/reduce/" + peerId;
+        clientPeer.addHandler(route,director);
+        ...
+    }
+    
+    ...
+}
+
+{% endhighlight %}
+
+Topic Thunder director inventory is : 1 X director[A1], 27 X director[B1], 1 X director[B2]
+
+Sudoku puzzle resolution depends on A1, B1 and B2 SM and lifecyle integration
+
+Resolvar SM behavior is stored in a 2D map of Java 8 lambda code samples
+
+Resolve is a functional interface, declaring 1 boolean method : hasNext
+
+Resolvar combines state.current and delegate.action to apply Resolve behaviour
+
+Respondar SM behavior is stored in a 1D map of Java 8 lambda code samples
+
+Quicken is a functional interface, declaring 1 method : respond
+
+Respondar depends on state.transtion to apply Quicken response behaviour
