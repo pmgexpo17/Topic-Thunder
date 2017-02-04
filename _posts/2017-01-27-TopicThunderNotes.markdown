@@ -116,8 +116,8 @@ public class SudokuModule extends AbstractModule {
   @Override
   protected void configure() {
 
-	...
- 
+...
+
     install(new FactoryModuleBuilder().
     implement(ServicePeer.class, ClientPeerB1.class).
     implement(MessageRouter.class,
@@ -127,8 +127,8 @@ public class SudokuModule extends AbstractModule {
     implement(ClientDirector.class,Names.named("game"),
         new TypeLiteral<Director<ResolveUnitB1,ResponseUnitB1>>() {}).
     build(PeerFactory.class));
-    
-	...
+
+    ...
 }
 
 public class SudokuModel extends AbstractLifeCycle {
