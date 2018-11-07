@@ -174,38 +174,6 @@ public class SudokuModel extends AbstractLifeCycle {
         modelScope.exit();
     }    
 
-    /*
-    private void addComponents() throws JMSException {
-
-        addComponent("COL1");
-        addComponent("COL2");
-        addComponent("COL3");
-        addComponent("COL4");
-        addComponent("COL5");
-        addComponent("COL6");
-        addComponent("COL7");
-        addComponent("COL8");
-        addComponent("COL9");
-        addComponent("ROWA");
-        addComponent("ROWB");
-        addComponent("ROWC");
-        addComponent("ROWD");
-        addComponent("ROWE");
-        addComponent("ROWF");
-        addComponent("ROWG");
-        addComponent("ROWH");
-        addComponent("ROWI");
-        addComponent("SQUA1");
-        addComponent("SQUA2");
-        addComponent("SQUA3");
-        addComponent("SQUB1");
-        addComponent("SQUB2");
-        addComponent("SQUB3");
-        addComponent("SQUC1");
-        addComponent("SQUC2");
-        addComponent("SQUC3");
-    }
-*/
     public void showAllRoutes() {
         
         clientPeer.getController().showAllRoutes();
